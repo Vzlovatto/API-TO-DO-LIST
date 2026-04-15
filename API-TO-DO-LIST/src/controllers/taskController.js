@@ -63,6 +63,23 @@ const updateTask = async (req, res, id) => {
     res.end(JSON.stringify({message: 'Removida'}));
   };
 
+const { getTaskById } = require('../services/taskService');
+
+const getById = (req, res, id) => {
+  const task = getTaskById(id);
+
+  if (!task) {
+    res.statusCode = 404;
+    return res.end(JSON.stringify({ message: 'Tarefa não encontrada' }));
+  }
+
+  res.end(JSON.stringify(task));
+};
+
+module.exports = {
+  getById
+};
+
   module.exports ={
     createTask,
     listTasks,
