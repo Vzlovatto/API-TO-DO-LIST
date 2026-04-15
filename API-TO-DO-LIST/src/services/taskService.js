@@ -18,7 +18,15 @@ const updateTask = (id, title) => {
   const task = tasks.find(t => t.id == id);
   if (!task) return null;
 
-  task.title = title;
+  if (data.title !== undefined){
+    task.title = data.title;
+    }
+
+  if (data.completed !== undefined){
+    task.completed = data.completed;
+  }
+
+  
   return task;
 };
 // Deletar
