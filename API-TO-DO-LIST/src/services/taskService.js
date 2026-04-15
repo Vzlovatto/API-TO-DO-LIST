@@ -14,33 +14,33 @@ const addTask = (title) => {
 const getTasks = () => tasks;
 
 // Atualizar
-const updateTask = (id, title) => {
+const updateTask = (id, data) => {
   const task = tasks.find(t => t.id == id);
   if (!task) return null;
 
-  if (data.title !== undefined){
+  if (data.title !== undefined) {
     task.title = data.title;
-    }
+  }
 
-  if (data.completed !== undefined){
+  if (data.completed !== undefined) {
     task.completed = data.completed;
   }
 
-  
   return task;
 };
+
 // Deletar
 const deleteTask = (id) => {
-    const index = tasks.findIndex(t => t.id === id);
-    if (index === -1) return false;
-  
-    tasks.splice(index, 1);
-    return true;
-  };
-  
-  module.exports = {
-    addTask,
-    getTasks,
-    updateTask,
-    deleteTask
-  };
+  const index = tasks.findIndex(t => t.id == id);
+  if (index === -1) return false;
+
+  tasks.splice(index, 1);
+  return true;
+};
+
+module.exports = {
+  addTask,
+  getTasks,
+  updateTask,
+  deleteTask
+};
