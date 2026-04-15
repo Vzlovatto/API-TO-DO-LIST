@@ -1,4 +1,5 @@
-const tasController = require('../controllers/taskController');
+const taskController = require('../controllers/taskController');
+const { getById } = require('../controllers/taskController');
 
 module.exports = (req, res) => {
     const url = req.url;
@@ -6,7 +7,7 @@ module.exports = (req, res) => {
 
     //GET /tesks
     if(url === '/tasks' && method == 'GET'){
-        return tasController.listTasks(req, res);
+        return taskController.listTasks(req, res);
     }
 
     // POST /tasks
@@ -24,6 +25,12 @@ module.exports = (req, res) => {
     if (url.startsWith('/tasks/') && method === 'DELETE'){
         const id = url.split('/')[2];
         return taskController.deleteTask(req,res,id);
+    }
+
+    
+    if (req.method === 'GET' && req.url.startsWith('/tasks/')) {
+      const id = req.url.split('/')[2];
+      return getById(req, res, id);
     }
 
     // Rota não encontrada
