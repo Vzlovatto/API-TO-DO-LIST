@@ -50,4 +50,3 @@ module.exports = {
   deleteTask,
   getTaskById
 };
-
