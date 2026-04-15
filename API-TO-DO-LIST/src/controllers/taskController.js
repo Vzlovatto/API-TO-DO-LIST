@@ -37,7 +37,7 @@ const getRequestBody = (req) => {
 const updateTask = async (req, res, id) => {
     const body = await getRequestBody(req);
   
-    const task = taskService.updateTask(id, body.title);
+    const task = taskService.updateTask(id, body);
   
     if (!task) {
       res.statusCode = 404;
