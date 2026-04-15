@@ -1,7 +1,7 @@
 const http = require('http');
 
-// Importa as rotas
-const taskRoutes = require('./routes/tasks');
+// Importa
+const taskRoute = require('./routes/taskRoute');
 
 // Cria servidor
 const server = http.createServer((req, res) => {
@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
   // Chama o roteador
-  taskRoutes(req, res);
+  taskRoute(req, res);
 });
 
 // Porta
