@@ -38,9 +38,16 @@ const deleteTask = (id) => {
   return true;
 };
 
+// Procurar id
+const getTaskById = (id) => {
+  return tasks.find(t => t.id == id);
+};
+
 module.exports = {
   addTask,
   getTasks,
   updateTask,
-  deleteTask
+  deleteTask,
+  getTaskById
 };
+
