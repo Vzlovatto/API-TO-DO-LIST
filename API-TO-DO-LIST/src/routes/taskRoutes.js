@@ -1,41 +1,38 @@
 const taskController = require('../controllers/taskController');
-const { getById } = require('../controllers/taskController');
 
 module.exports = (req, res) => {
-    const url = req.url;
-    const method = req.method;
+  const url = req.url;
+  const method = req.method;
 
-    //GET /tesks
-    if(url === '/tasks' && method == 'GET'){
-        return taskController.listTasks(req, res);
-    }
+  // GET /tasks
+  if (url === '/tasks' && method === 'GET') {
+    return taskController.listTasks(req, res);
+  }
 
-    // POST /tasks
-    if (url === '/tasks' && method === "POST"){
-        return taskController.createTask(req, res);
-    }
+  // GET /tasks/:id
+  if (url.startsWith('/tasks/') && method === 'GET') {
+    const id = url.split('/')[2];
+    return taskController.getById(req, res, id);
+  }
 
-    // PUT /tasks/:id
-    if (url.startsWith('/tasks/') && method === 'PUT'){
-        const id = urs.split('/')[2];
-        return taskController.updateTask(req,res,id);
-    }
+  // POST /tasks
+  if (url === '/tasks' && method === 'POST') {
+    return taskController.createTask(req, res);
+  }
 
-    // DELETE /tasks/:id
-    if (url.startsWith('/tasks/') && method === 'DELETE'){
-        const id = url.split('/')[2];
-        return taskController.deleteTask(req,res,id);
-    }
+  // PUT /tasks/:id
+  if (url.startsWith('/tasks/') && method === 'PUT') {
+    const id = url.split('/')[2]; // CORRIGIDO
+    return taskController.updateTask(req, res, id);
+  }
 
-    
-    if (req.method === 'GET' && req.url.startsWith('/tasks/')) {
-      const id = req.url.split('/')[2];
-      return getById(req, res, id);
-    }
+  // DELETE /tasks/:id
+  if (url.startsWith('/tasks/') && method === 'DELETE') {
+    const id = url.split('/')[2];
+    return taskController.deleteTask(req, res, id);
+  }
 
-    // Rota não encontrada
-    res.statusCode = 404;
-    res.end(JSON.stringify({message : 'rota não encontrada'}))
-
-
+  // não encontrada
+  res.statusCode = 404;
+  res.end(JSON.stringify({ message: 'rota não encontrada' }));
 };
